@@ -14,9 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        # Yeh batayega ki code ko 'MySetupApp' folder ke andar daalo
-        with:
-          path: MySetupApp
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -26,8 +23,8 @@ jobs:
           cache: gradle
       
       # YEH FINAL AUR GUARANTEED SOLUTION HAI
-      - name: Clean and Build Project Inside Correct Folder
-        # Hum pehle 'MySetupApp' folder ke andar jayenge, fir saari commands chalayenge
+      - name: Go into correct folder and Build
+        # Hum pehle 'MySetupApp' folder ke andar jayenge, fir saare kaam karenge
         run: |
           cd MySetupApp
           chmod +x gradlew
