@@ -22,16 +22,17 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       # YEH FINAL AUR GUARANTEED SOLUTION HAI
-      - name: Go into correct folder and Build
-        # Hum pehle 'MySetupApp' folder ke andar jayenge, fir saare kaam karenge
-        run: |
-          cd MySetupApp
-          chmod +x gradlew
-          ./gradlew clean assembleDebug --no-build-cache --refresh-dependencies
+      - name: Force Clean, Refresh, and Build
+        # Hum koi folder change nahi kar rahe hain. Seedha build kar rahe hain.
+        # --no-build-cache har tarah ke cache ko ignore karega
+        run: ./gradlew clean assembleDebug --no-build-cache --refresh-dependencies
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: SetupWizard-debug
-          path: MySetupApp/app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
