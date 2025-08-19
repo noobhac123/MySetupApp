@@ -1,0 +1,38 @@
+# .github/workflows/android-build.yml
+
+name: Android CI Build
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          # Hum cache ko yahan rakhenge, lekin build command use zabardasti refresh karegi
+          cache: gradle
+      
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # YEH FINAL AUR GUARANTEED SOLUTION HAI
+      - name: Force Clean, Refresh, and Build
+        # --no-build-cache har tarah ke cache ko ignore karega
+        run: ./gradlew clean assembleDebug --no-build-cache --refresh-dependencies
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SetupWizard-debug
+          path: app/build/outputs/apk/debug/app-debug.apk

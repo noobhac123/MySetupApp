@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- Modern Layout for Android 11+ -->
+    <LinearLayout
+        android:id="@+id/modern_device_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setup Status" />
+
+        <TextView
+            android:id="@+id/tvIpAddress"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="IP Address: Searching..." />
+
+        <TextView
+            android:id="@+id/tvPort"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Port: Searching..." />
+
+        <TextView
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Instructions:\n1. Go to Developer Options on the target device.\n2. Enable Wireless Debugging.\n3. Tap on 'Pair device with pairing code'.\n4. Enter the code in this app's notification." />
+    </LinearLayout>
+
+    <!-- Legacy Layout for Older Devices -->
+    <LinearLayout
+        android:id="@+id/legacy_device_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <TextView
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Older Device Detected" />
+
+        <Button
+            android:id="@+id/btnCopyApk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Copy TargetApp.apk to Downloads" />
+
+        <TextView
+            android:id="@+id/tvInstructions"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Instructions:\n1. Connect the target device via USB.\n2. Enable USB Debugging in Developer Options.\n3. Use a computer with ADB to install the TargetApp.apk from the Downloads folder on this device." />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
